@@ -3,6 +3,8 @@ import static io.restassured.RestAssured.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import static org.hamcrest.Matchers.*;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import BaseUrl.ApiEndpoints;
@@ -11,9 +13,14 @@ import Users.Users;
 
 public class UserApiTest {
 
+    @Before
+    public void setUp() {
+        // Configura a URI base para os endpoints da API
+        RestAssured.baseURI = ApiEndpoints.BASE_URI;
+    }
+
         @Test
         public void testRegisterUser() {
-            RestAssured.baseURI = ApiEndpoints.BASE_URI;
     
             String email = Client.getEmail();
             String password = Client.getPassword();
@@ -33,8 +40,7 @@ public class UserApiTest {
 @Test
 
 public void testUserLogin() {
-    RestAssured.baseURI = ApiEndpoints.BASE_URI;
-
+    
     String email = Client.getEmail();
     String password = Client.getPassword();
 
@@ -52,7 +58,6 @@ public void testUserLogin() {
 
 @Test
 public void testInvalidUserRegistration() {
-    RestAssured.baseURI = ApiEndpoints.BASE_URI;
 
     String email = Client.getEmail();
 
@@ -67,7 +72,6 @@ public void testInvalidUserRegistration() {
 
 @Test
 public void testEmptyPasswordLogin() {
-    RestAssured.baseURI = ApiEndpoints.BASE_URI;
 
     String email = Client.getEmail();
 
@@ -83,7 +87,7 @@ public void testEmptyPasswordLogin() {
 
 @Test
 public void testEmptyFIeldsLogin() {
-    RestAssured.baseURI = ApiEndpoints.BASE_URI;
+   
 
     given()
         .contentType(ContentType.JSON)
@@ -96,7 +100,6 @@ public void testEmptyFIeldsLogin() {
 }
 @Test
 public void testEmptyFIeldsRegister() {
-    RestAssured.baseURI = ApiEndpoints.BASE_URI;
 
     given()
         .contentType(ContentType.JSON)

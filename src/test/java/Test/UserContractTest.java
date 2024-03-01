@@ -4,6 +4,7 @@ import static io.restassured.RestAssured.*;
 //import static org.hamcrest.Matchers.notNullValue;
 //import static org.hamcrest.Matchers.*;
 import org.apache.http.HttpStatus;
+import org.junit.Before;
 import org.junit.Test;
 
 import BaseUrl.ApiEndpoints;
@@ -17,10 +18,15 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 
 public class UserContractTest {
 
+        @Before
+    public void setUp() {
+        // Configura a URI base para os endpoints da API
+        RestAssured.baseURI = ApiEndpoints.BASE_URI;
+    }
+
     @Test
     public void contractRegisterUsersTest(){
 
-        RestAssured.baseURI = ApiEndpoints.BASE_URI;
     
             String email = Client.getEmail();
             String password = Client.getPassword();
@@ -37,8 +43,6 @@ public class UserContractTest {
     }
     @Test
     public void contractLoginUsersTest(){
-
-        RestAssured.baseURI = ApiEndpoints.BASE_URI;
     
             String email = Client.getEmail();
             String password = Client.getPassword();
